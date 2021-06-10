@@ -63,13 +63,13 @@
       data: jsPsych.timelineVariable('data'),
 	  on_finish: function(data){
 		data.correct = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(data.correct_response);
-		data.three = data.stimulus == '<div style="font-size:64px;">3</div>';
+		data.three = data.stimulus == '<div style="font-size:64px;">3</div>' || data.stimulus == '<div style="font-size:64px;">3</div>';
 		if(data.correct == true){
 		  data.type = 1;
 		} else {
 		  data.type = 0;
 	       };
-		if(data.stimulus == '<div style="font-size:64px;">3</div>'){
+		if(data.stimulus == '<div style="font-size:64px;">3</div>' || data.stimulus == '<div style="font-size:64px;">6</div>'){
 		  data.go = 3;
 		} else {
 		  data.go = 2;
