@@ -19,7 +19,7 @@
 				"<br>" +
 				'<div style = "font-size:19px;">If the number is <strong>3</strong>, do not press anything.</div>' +
 				"<br>" +
-				'<div style = "font-size:19px;">If it is any other number between <strong>1-2</strong> or <strong>4-9</strong>, press the <strong>Space Bar</strong> as fast as you can.</div>' +
+				'<div style = "font-size:19px;">If it is not numbers <strong>0, 1, 2, 4, 5, 6, 7, 8, 9</strong>, but numbers <strong>3, 6</strong> press the <strong>Space Bar</strong> as fast as you can.</div>' +
 				"<br>" +
 				'<div style = "font-size:19px;"> Make sure the experiment is open in an active window, displayed in the center and you are using a computer. </div>'+
 				"<br>" +
@@ -33,13 +33,13 @@
     /* TRIALS */
 	
 	var test_stimuli = [
+	  { stimulus: '<div style="font-size:64px;">0</div>', data: { test_part: 'test', correct_response: 'Space'} },
 	  { stimulus: '<div style="font-size:64px;">1</div>', data: { test_part: 'test', correct_response: 'Space'} },
 	  { stimulus: '<div style="font-size:64px;">2</div>', data: { test_part: 'test', correct_response: 'Space'} },
 	  { stimulus: '<div style="font-size:64px;">3</div>', data: { test_part: 'test', correct_response: 'None'}  },
-//	  { stimulus: '<div style="font-size:64px;">3</div>', data: { test_part: 'test', correct_response: 'None', font_size: '64'   } },
 	  { stimulus: '<div style="font-size:64px;">4</div>', data: { test_part: 'test', correct_response: 'Space'} },
 	  { stimulus: '<div style="font-size:64px;">5</div>', data: { test_part: 'test', correct_response: 'Space'} },
-	  { stimulus: '<div style="font-size:64px;">6</div>', data: { test_part: 'test', correct_response: 'Space'} },
+	  { stimulus: '<div style="font-size:64px;">6</div>', data: { test_part: 'test', correct_response: 'None'} },
 	  { stimulus: '<div style="font-size:64px;">7</div>', data: { test_part: 'test', correct_response: 'Space'} },
 	  { stimulus: '<div style="font-size:64px;">8</div>', data: { test_part: 'test', correct_response: 'Space'} },
 	  { stimulus: '<div style="font-size:64px;">9</div>', data: { test_part: 'test', correct_response: 'Space'} }
@@ -58,7 +58,7 @@
       stimulus: jsPsych.timelineVariable('stimulus'),
       choices: ['f1','Space'],
 	  stimulus_duration: 250,
-	  trial_duration: 1135,
+	  trial_duration: 2735 + Math.random() * 1000,
 	  response_ends_trial: false,
       data: jsPsych.timelineVariable('data'),
 	  on_finish: function(data){
@@ -98,9 +98,9 @@
 		var correct_go_trials = correct_trials.filter({three: false});
 
 		var correct_no_go_p = correct_relevant.count();
-		var incorrect_no_go_p = no_trials * 1 - correct_relevant.count();
+		var incorrect_no_go_p = no_trials * 2 - correct_relevant.count();
 		var correct_go_p = correct_trials.count() - correct_no_go_p;
-		var incorrect_go_p = no_trials * 8 - correct_go_p;
+		var incorrect_go_p = no_trials * 4 - correct_go_p;
 		
 		/* ANALYTIC CALCULATIONS */
 		
@@ -152,7 +152,7 @@
 					"<br>" +
 					'<div style = "font-size:19px;">Please, check if you got the expected responses:</div>'+
 					"<br>" +
-					'<div style = "font-size:19px;">You missed '+incorrect_go_p+' of the numbers (1, 2, 4, 5, 6, 7, 8, 9) and incorrectly reacted  '+incorrect_no_go_p+'x  to number 3.</div>'+
+					'<div style = "font-size:19px;">You missed '+incorrect_go_p+' of the numbers (0, 1, 2, 4, 5, 7, 8, 9) and incorrectly reacted  '+incorrect_no_go_p+'x  to numbers 3 and 6.</div>'+
 					"<br>" +
 					'<div style = "font-size:19px;"> Your accuracy when you were supposed to press the spacebar was '+accuracy_go+'% and when you were supposed not to press anything was '+accuracy_nogo+'%. </div>'+
 					"<br>" +
